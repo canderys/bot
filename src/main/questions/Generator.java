@@ -11,7 +11,7 @@ public class Generator {
 	{
 		try
 		{
-			File file = new File("resources//" + fileName);			
+			File file = new File(fileName);			
 			Scanner in = new Scanner(file);
 			while (in.hasNextLine())
 				quetions.add(new Question(in.nextLine()));
