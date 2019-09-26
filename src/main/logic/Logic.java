@@ -9,18 +9,24 @@ import main.questions.Question;
 public class Logic {
 
 	public static void main(String[] args)
-	{
+	{ 
 		Console.Print("hello");
-		while(true)
+		Generator generator  = new Generator("resourses\\questions.txt");
+		Scanner in = new Scanner(System.in);
+		boolean isEnd = false;
+		while(!isEnd)
 		{
-			Scanner in = new Scanner(System.in);
-			Generator generator  = new Generator("resourses\\questions.txt");
 			for(Question question : generator.quetions)
 			{
 				Console.Print(question.Text);
 				question.Answer = in.nextLine();
+				if(question.Answer.equals("end"))
+				{
+					isEnd = true;
+					break;
+				}
 			}
-			in.close();
 		}
+		in.close();
 	}
 }

@@ -8,4 +8,8 @@ public class Question {
 	{
 		Text = text;
 	}
+	public boolean equals(Question anotherQuestion)
+	{
+		return this.Text == anotherQuestion.Text;
+	}
 }
