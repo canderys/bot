@@ -13,18 +13,14 @@ public class Logic {
 		Console.Print("hello");
 		Generator generator  = new Generator("resourses\\questions.txt");
 		Scanner in = new Scanner(System.in);
-		boolean isEnd = false;
 		int index = 0;
-		while(!isEnd)
+		while(true)
 		{
 			Question question = generator.quetions.get(index);
 			Console.Print(question.Text);
 			question.Answer = in.nextLine();
 			if(question.Answer.equals("end"))
-			{
-				isEnd = true;
 				break;
-			}
 			index = (index + 1) % generator.quetions.size();
 		}
 		in.close();
