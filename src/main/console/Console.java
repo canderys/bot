@@ -7,6 +7,11 @@ public class Console {
 		System.out.println(s);
 	}
 	
+	public static void Print(int s)
+	{
+		System.out.println(Integer.toString(s));
+	}
+	
 	public static String Read()
 	{
 		Scanner in = new Scanner(System.in);

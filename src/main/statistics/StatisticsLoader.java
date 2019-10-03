@@ -1,4 +1,4 @@
-package main.statisticsLoader;
+package main.statistics;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,6 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import main.console.Console;
+import main.statistics.HeroStatistics;
+import main.statistics.StatisticsParser;
+import java.util.Map;
 
 public class StatisticsLoader {
 	public static void main(String[] args)
@@ -20,8 +23,8 @@ public class StatisticsLoader {
 			connection = (HttpURLConnection) new URL(path).openConnection();
 			connection.setRequestMethod("GET");
 			connection.setUseCaches(false);
-			connection.setConnectTimeout(2000);
-			connection.setReadTimeout(2000);
+			connection.setConnectTimeout(10000);
+			connection.setReadTimeout(10000);
 			
 			connection.connect();
 			
@@ -35,7 +38,13 @@ public class StatisticsLoader {
 					s.append(line);
 					s.append("\n");
 				}
-				Console.Print(s.toString());
+				
+				Map<String, HeroStatistics> heroStat = StatisticsParser.GetAllHeroesStatistics(s.toString());
+				heroStat.remove(null);
+				for (String key : heroStat.keySet())
+				{
+					Console.Print(heroStat.get(key).id + ": " + key + ". Winrate: " + Math.floor((double)heroStat.get(key).winsAmount / (double)heroStat.get(key).matchesAmount * 10000) / 100 + "%");
+				}
 			}
 			else
 			{
